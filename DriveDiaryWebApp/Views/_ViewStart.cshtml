@@ -1,0 +1,11 @@
+﻿@{
+    // SL: Use custom layout page for create/edit refuel event action in order to include datetimepicker bundles
+    if(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "RefuelEvents"
+        && ( HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() == "Create"
+             || HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() == "Edit")) {
+        Layout = "~/Views/Shared/_Layout_DateTimePicker.cshtml";
+    } 
+    else {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
