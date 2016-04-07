@@ -1,0 +1,74 @@
+﻿@model DriveDiaryWebApp.Models.RefuelEvent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RefuelEvent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Mark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.Mark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuelMileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuelMileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuelDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuelDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuelLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuelLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuelAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuelAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PricePerLiter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PricePerLiter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuelEventDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuelEventDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RefuelEventId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
