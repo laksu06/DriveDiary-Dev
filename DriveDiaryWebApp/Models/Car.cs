@@ -31,5 +31,11 @@ namespace DriveDiaryWebApp.Models
         [Required]
         [DataType(DataType.Text)]
         public string Model { get; set; }
+
+        // SL: Model designation is required text field
+        // SL: This maps this car to a certain DriveDiary user
+        [Required]
+        [DataType(DataType.Text)]
+        public string Owner { get; set; }
     }
 }

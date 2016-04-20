@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IdentityModel.Services;
+using System.IdentityModel.Services.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,6 +19,7 @@ using DriveDiaryWebApp.Models;
 using System.Diagnostics;
 // SL: For consumption view
 using DriveDiaryWebApp.ViewModels;
+using System.Threading;
 
 namespace DriveDiaryWebApp.Controllers
 {
@@ -181,7 +184,19 @@ namespace DriveDiaryWebApp.Controllers
         public ActionResult Create()
         {
             Trace.TraceInformation(">CarsController:Create()");
-            return View();
+            Car car = new Car();
+            bool isAuth = Thread.CurrentPrincipal.Identity.IsAuthenticated;
+            if (isAuth)
+            {
+                string authUser = Thread.CurrentPrincipal.Identity.Name;
+                Trace.TraceInformation("-CarsController:Create() - creating car for user {0}", authUser);
+                car.Owner = authUser;
+            }
+            else
+            {
+                car.Owner = "Unknown";
+            }
+            return View(car);
         }
 
         // POST: Cars/Create
@@ -189,17 +204,18 @@ namespace DriveDiaryWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CarId,Mark,Model")] Car car)
+        //public ActionResult Create([Bind(Include = "CarId,Mark,Model,Owner")] Car car)
+        public ActionResult Create([Bind] Car incoming_car)
         {
             Trace.TraceInformation(">CarsController:Create() POST");
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                db.Cars.Add(car);
+                db.Cars.Add(incoming_car);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(car);
+            return View(incoming_car);
         }
 
         // GET: Cars/Edit/5

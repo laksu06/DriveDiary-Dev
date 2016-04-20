@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 // SL: Add log messages for Azure Application Logs ("Trace.WriteLine")
 using System.Diagnostics;
+using System.Threading;
 
 namespace DriveDiaryWebApp.Controllers
 {
@@ -22,12 +23,14 @@ namespace DriveDiaryWebApp.Controllers
         // GET: SignedInHome
         public ActionResult Index()
         {
+            ViewBag.ClaimsIdentity = Thread.CurrentPrincipal.Identity;
             return View();
         }
         
         public ActionResult About()
         {
             Trace.TraceInformation(">HomeController:About()");
+            ViewBag.ClaimsIdentity = Thread.CurrentPrincipal.Identity;
             ViewBag.Message = "DriveDiary";
 
             return View();
@@ -36,6 +39,7 @@ namespace DriveDiaryWebApp.Controllers
         public ActionResult Contact()
         {
             Trace.TraceInformation(">HomeController:Contact()");
+            ViewBag.ClaimsIdentity = Thread.CurrentPrincipal.Identity;
             ViewBag.Message = "Contact";
 
             return View();
